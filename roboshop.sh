@@ -4,7 +4,7 @@ AMI_ID="ami-0220d79f3f480ecf5"
 SG_ID="sg-0f6e742e245b89ea2"
 INSTANCES=("mongodb" "catalogue" "frontend")
 ZONE_ID="Z023331010RKI0PUDAOV9"
-DOMAIN_ID="karanam.site"
+DOMAIN_NAME="karanam.site"
 
 
 for instance in ${INSTANCES[@]}
