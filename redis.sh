@@ -2,10 +2,10 @@
 
 START_TIME=$(date +%s)
 USERID=$(id -u)
-R="e[31m"
-G="e[32m"
-Y="e[33m"
-N="e[0m"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
@@ -32,22 +32,22 @@ VALIDATE (){
     fi
 }
  
-dnf module disable redis -y
+dnf module disable redis -y  &>>$LOG_FILE
 VALIDATE $? "DISABLE REDIS"
 
-dnf module enable redis:7 -y
+dnf module enable redis:7 -y  &>>$LOG_FILE
 VALIDATE $? "ENABLE REDIS"
 
-dnf install redis -y 
+dnf install redis -y  &>>$LOG_FILE
 VALIDATE $? "INSTALL REDIS"
 
 sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATE $? "Edited redis.conf to accept remote connections"
 
-systemctl enable redis 
+systemctl enable redis  &>>$LOG_FILE
 VALIDATE $? "ENABLE REDIS"
 
-systemctl start redis 
+systemctl start redis  &>>$LOG_FILE
 VALIDATE $? "START REDIS"
 
 END_TIME=$(date +%s)
