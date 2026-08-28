@@ -33,7 +33,7 @@ VALIDATE(){
     fi
 }
 
-dnf module disbale nginx -y
+dnf module disable nginx -y
 VALIDATE $? "Disabling nginx"
 
 dnf module enable nginx:1.24 -y
