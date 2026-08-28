@@ -39,7 +39,7 @@ VALIDATE $? "Disabling nginx"
 dnf module enable nginx:1.24 -y
 VALIDATE $? "Enabling Nginx1.24"
 
-dnf isntall nginx -y
+dnf install nginx -y
 VALIDATE $? "installing nginx"
 
 systemctl enable nginx 
