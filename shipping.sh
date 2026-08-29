@@ -9,7 +9,7 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
-SCRIPT_DIR=$pwd
+SCRIPT_DIR=$PWD
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executing at: $(date)" | tee -a $LOG_FILE
@@ -78,7 +78,7 @@ dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "installing mysql"
 
 mysql -h mysql.karanam.site -uroot -p$MYSQL_ROOT_PASSWORD -e 'use cities' &>>$LOG_FILE
-if [ $? - ne 0 ]
+if [ $? -ne 0 ]
 then
     mysql -h mysql.karanam.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql
     mysql -h mysql.karanam.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql 
