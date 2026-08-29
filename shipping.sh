@@ -9,7 +9,7 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
-SCRIPT_DIR=$PWD
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executing at: $(date)" | tee -a $LOG_FILE
@@ -64,7 +64,7 @@ VALIDATE $? "downloading dependencies"
 mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 VALIDATE $? "Re-naming shipping jar"
 
-cp $SCRIPT_DIR /shipping.service /etc/systemd/system/shipping.service &>>$LOG_FILE
+cp "$SCRIPT_DIR/shipping.service" /etc/systemd/system/shipping.service &>>$LOG_FILE
 VALIDATE $? "copying shipping services"
 
 systemctl daemon-reload &>>$LOG_FILE
