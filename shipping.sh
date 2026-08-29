@@ -64,7 +64,7 @@ VALIDATE $? "downloading dependencies"
 mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 VALIDATE $? "Re-naming shipping jar"
 
-cp $SCRIPT_DIR /shipping.services /etc/systemd/system/shipping.service &>>$LOG_FILE
+cp $SCRIPT_DIR /shipping.service /etc/systemd/system/shipping.service &>>$LOG_FILE
 VALIDATE $? "copying shipping services"
 
 systemctl daemon-reload &>>$LOG_FILE
